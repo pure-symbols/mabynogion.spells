@@ -1,10 +1,16 @@
 Package: myrddin
+
 Title: Myrddin - 🧚🏻‍♀️ magic toys 🤯
 Description: 
 	Some toys to do things about many thing ...
-Version: 0.1.0
+
+Version: 0.0.0.9000
 Author: Ypa Y Yhm <y.ypa.yhm@outlook.com>
 Depends: 
 	R (>= 4.3)
-License: AGPL-2.0
-LazyData: true
+
+License: AGPL (>= 3)
+Encoding: UTF-8
+
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
