@@ -2,16 +2,19 @@
 
 
 
-codes_lsby = function (strs, .lser, ...) strs |> 
+codes_lsby = function 
+(lister) function 
+(strs, ...) strs |> 
 	base::Vectorize(codes_str2call)() |> 
-	warpper_vec(.vec_ref = strs)(.lser)(...) |> 
-	base::unlist() |> 
-	base::unique() |> 
-	base::lapply(base::as.character) |> 
-	base::unlist()
+	warpper_vec(.vec_ref = strs)(lister)(...) |> 
+	base::lapply(
+		base::unlist %bind% 
+			base::unique %bind% 
+			base::as.character) |> 
+	base::identity()
 
-codes_varls = function (strs) strs |> codes_lsby(calls_varls)
-codes_funls = function (strs) strs |> codes_lsby(calls_funls)
+codes_varls = function (strs, ...) strs |> codes_lsby(calls_varls)(...)
+codes_funls = function (strs, ...) strs |> codes_lsby(calls_funls)(...)
 
 
 
@@ -27,7 +30,7 @@ codes_trby = function
 			base::identity()) |> 
 	base::identity()
 
-codes_vartr = function (strs, .f) strs |> codes_trby(calls_vartr)(.f = .f)
+codes_vartr = function (strs, .f, ...) strs |> codes_trby(calls_vartr)(.f = .f, ...)
 
 
 #| > base::c('1+2-3*x~4/5^6;{abc(def)};ghi(jkl = mno,.pqr = stu)', '789', '10 * 1', '11/R') |> codes_vartr(symbol_gravewarp)
@@ -48,5 +51,5 @@ codes_vartr = function (strs, .f) strs |> codes_trby(calls_vartr)(.f = .f)
 
 
 
-
+codes_pkgls = function (strs, ...) strs |> codes_lsby(calls_pkgls)(...)
 

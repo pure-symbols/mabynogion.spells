@@ -1,13 +1,13 @@
 
-looper_reduce = function (.itr, .f, .init = NULL) 
+looper_reduce = function (.iter, .f, .init = NULL) 
 {
 	if (base::is.null(.init)) 
 	{
-		.init = .itr |> utils::head(1)
-		.itr = .itr |> utils::tail(-1)
+		.init = .iter |> utils::head(1)
+		.iter = .iter |> utils::tail(-1)
 	}
 	
-	for (.i in .itr) {.init <- .f(.init, .i)}
+	for (.i in .iter) {.init <- .f(.init, .i)}
 	base::return(.init)
 }
 

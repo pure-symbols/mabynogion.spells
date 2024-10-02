@@ -20,7 +20,8 @@ list_update = function (.ls, ..., .news = base::list(...)) base::c(.ls, .news) |
 
 
 
-list_append = function (.lst, ..., ..pairs = base::list(...)) .lst |> base::c(..pairs)
+list_append = function (.lst, ..., ..pairs = base::list(...)) .lst |> concat_tail(..pairs)
+list_follow = function (.lst, ..., ..pairs = base::list(...)) .lst |> concat_head(..pairs)
 
 list_pairs = function (.name, .value) base::list(.value) |> name_as(.name)
 
@@ -46,4 +47,21 @@ list_isnested = function (lst) base::is.list(lst) && lst |>
 
 concat_head = function (.x, .head) .head |> base::c(.x)
 concat_tail = function (.x, .tail) .x |> base::c(.tail)
+
+
+list_headis = function (
+		.list, 
+		..., 
+		.comps = base::list(...), 
+		.n = base::length(.comps), 
+		.comparer = base::identical) .list |> 
+	utils::head(.n) |> 
+	.comparer(.comps) |> 
+	base::identity()
+
+#| > list(quote(`+`), quote(`*`), quote(`::`)) |> list_headis(quote(`+`))
+#| [1] TRUE
+#| > list(quote(`+`), quote(`*`), quote(`::`)) |> list_headis(quote(`+`), quote(`*`))
+#| [1] TRUE
+
 
