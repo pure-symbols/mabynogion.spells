@@ -7,12 +7,21 @@ list_files = function (path) name_asself(base::list.files(path)) |>
 load_file = readr::read_file
 file_loader = memoise::memoise(load_file)
 
-#' @param file_glob i.e., '*.R'
-#' @param file_regexp i.e., '.*\\.R$'
+#' @param dir_path: The path you want to found something.
+#' @param file_glob: To match file by glob expression. i.e., '*.R'
+#' @param file_regexp: To match file by reg expression. i.e., '.*\\.R$'
+#' @param reader: To specify the function for file read, default is memoised `readr::read_file`.
+#' 
+#' @examples
+#' 
+#' # find code in your package
+#' myrddin::load_files('R')
+#' myrddin::load_files('.', file_glob = '*.R')
+#' myrddin::load_files('R') |> magrittr::'%>%'(.[. |> base::grepl('fs::', x = _, fixed = T)])
 #' 
 load_files = function (
 		dir_path = '.', 
-		reader = readr::read_file, 
+		reader = file_loader, 
 		file_glob = NULL, 
 		file_regexp = NULL, 
 		type = base::c('file','FIFO','character_device'), 

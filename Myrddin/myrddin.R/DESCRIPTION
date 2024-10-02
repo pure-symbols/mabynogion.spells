@@ -7,9 +7,15 @@ Author: Ypa Y Yhm <y.ypa.yhm@outlook.com>
 Depends: 
 	R (>= 4.3)
 Imports: 
-	dplyr, dtplyr, tibble, data.table, readr
+	diffdf, freqtables, tictoc,
+	 magrittr, dplyr, fs,
+	 memoise, usethis, 
+	 dtplyr, tibble, data.table,
+	 readr, readxl, writexl
 Suggests: 
-	lubridate
+	zoo, lubridate,
+	 fusen, roxygen2,
+	 devtools, testthat
 License: AGPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
