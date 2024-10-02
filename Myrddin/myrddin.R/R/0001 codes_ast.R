@@ -43,27 +43,3 @@ ast_varsapply = function (ast, f) if
 
 
 
-
-
-calls_trby = function (
-		calls, 
-		.transer, 
-		.f) calls |> 
-	codes_call2ast() |> 
-	.transer(.f) |> 
-	codes_ast2call()
-
-calls_elemtr = function (calls, .f) calls_trby(
-	.transer = ast_elemapply,
-	.f = .f,
-	calls = calls)
-
-calls_asttr = function (calls, .f) calls_trby(
-	.transer = ast_astapply,
-	.f = .f,
-	calls = calls)
-
-#| > list(1,2,3+1-4*5) |> quote() |> calls_elemtr(\ (a) if (a |> identical(quote(`*`))) quote(`/`) else a) |> codes_ast2call()
-#| list(1, 2, 3 + 1 - 4/5)
-#| > list(1*2,3+1-4/5,list(6*7)) |> quote() |> calls_asttr(\ (a) if (a[[1]] |> identical(quote(`*`))) `[[<-`(a, 2, value = 666) else a)
-#| list(666 * 2, 3 + 1 - 4/5, list(666 * 7))

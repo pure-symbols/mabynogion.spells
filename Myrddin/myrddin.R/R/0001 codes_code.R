@@ -2,23 +2,6 @@
 
 
 
-
-
-calls_varls = function (calls) calls |> 
-	base::lapply(codes_call2ast) |> 
-	base::lapply(\ (x) x |> ast_astapply(\ (a) base::list(base::list()) |> base::c(a |> utils::tail(-1)))) |> 
-	base::lapply(\ (x) x |> ast_elemapply(\ (x) if (base::is.symbol(x)) x else base::list())) |> 
-	base::lapply(base::unlist) |> 
-	base::lapply(base::unique) |> 
-	base::identity()
-
-calls_funls = function (calls) calls |> 
-	base::lapply(codes_call2ast) |> 
-	base::lapply(\ (x) x |> ast_astapply(.f = base::identity, .f_aleaf = \ (x) x |> utils::head(1))) |> 
-	base::lapply(base::unlist) |> 
-	base::lapply(base::unique) |> 
-	base::identity()
-
 codes_lsby = function (strs, .lser, ...) strs |> 
 	base::Vectorize(codes_str2call)() |> 
 	warpper_vec(.vec_ref = strs)(.lser)(...) |> 
@@ -32,12 +15,6 @@ codes_funls = function (strs) strs |> codes_lsby(calls_funls)
 
 
 
-
-calls_vartr = function (calls, .f) calls |> 
-	base::lapply(codes_call2ast) |> 
-	base::lapply(\ (a) a |> ast_varsapply(.f)) |> 
-	base::lapply(codes_ast2call) |> 
-	base::identity()
 
 codes_trby = function 
 (transer) function 
@@ -71,5 +48,5 @@ codes_vartr = function (strs, .f) strs |> codes_trby(calls_vartr)(.f = .f)
 
 
 
-codes_pkgls = function ()
+
 
