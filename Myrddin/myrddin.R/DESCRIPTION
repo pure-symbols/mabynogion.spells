@@ -7,7 +7,7 @@ Author: Ypa Y Yhm <y.ypa.yhm@outlook.com>
 Depends: 
 	R (>= 4.3)
 Imports: 
-	readr
+	dplyr, dtplyr, tibble, data.table, readr
 Suggests: 
 	lubridate
 License: AGPL (>= 3)
