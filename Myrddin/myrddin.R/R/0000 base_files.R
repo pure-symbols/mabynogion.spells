@@ -51,3 +51,19 @@ writelines_list = function (
 	magrittr::'%>%'(name_as(., pathes)) |> 
 	magrittr::'%T>%'({usethis::ui_info("Writing into files: {usethis::ui_value(base::names(.))}")}) |> 
 	purrr::imap(readr::write_lines)
+
+
+findin_files = function (
+		.pattern, 
+		.dirpath = ".", 
+		..., 
+		.name_only = T) load_files(.dirpath, ...) |> 
+	magrittr::'%>%'(.[base::grepl(.pattern, x = ., fixed = T)]) |> 
+	(if (!.name_only) base::identity else base::names)() |> 
+	base::identity()
+
+#| > findin_files('sys_envload', 'R', reader = load_file)
+#| [1] "R/0000 base_files.R" "R/0000 base_sys.R"  
+#| > findin_files('sys_envload', recurse = T, reader = load_file)
+#| [1] "R/0000 base_files.R" "R/0000 base_sys.R"  
+

@@ -6,7 +6,7 @@ ast_astapply = function (
 		.f_aleaf = .f, 
 		.f_elem = base::identity) if 
 (!base::is.list(a)) a else a |> 
-	base::lapply (
+	base::lapply(
 		\ (as) if 
 		(list_isnested(as)) as |> 
 			ast_astapply(
@@ -19,9 +19,14 @@ ast_astapply = function (
 	.f_atree() |> 
 	base::identity()
 
+
+
+
+
+
 ast_elemapply = function (ast, f) if 
 (!base::is.list(ast)) ast else ast |> 
-	purrr::map(
+	base::lapply(
 		\ (x) if 
 		(!base::is.list(x)) f(x) else x |> 
 			ast_elemapply(f)) |> 

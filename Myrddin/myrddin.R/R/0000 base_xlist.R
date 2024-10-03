@@ -89,3 +89,44 @@ xrosslist = function (
 #| [1] 4
 #| 
 #| 
+
+
+
+tidy_transpose = function (
+		df, 
+		.rownames_maker = 
+			\ (.data) tibble::rownames_to_column(
+				var = ".rowname",
+				.data = .data),
+		.keep_colname = F) tibble::as_tibble(df) |> 
+	.rownames_maker() |> 
+	tidyr::pivot_longer(
+		cols = - .rowname,
+		names_to = ".colname",
+		values_to = ".value") |> 
+	tidyr::pivot_wider(
+		names_from = .rowname,
+		values_from = .value) |> 
+	dplyr::select(- tidyselect::all_of(
+		if (.keep_colname) NULL else '.colname')) |> 
+	base::identity()
+
+# tibble::tibble(1:4,2:5) |> tidy_transpose()
+# # # A tibble: 2 × 4
+# #     `1`   `2`   `3`   `4`
+# #   <int> <int> <int> <int>
+# # 1     1     2     3     4
+# # 2     2     3     4     5
+
+# tibble::tibble (1:4,4:1) |> 
+#   tidy_transpose(.keep_colname = T) |> 
+#   tidy_transpose(\ (.d) dplyr::rename(.d, .rowname = .colname))
+# # # A tibble: 4 × 2
+# #   `1:4` `4:1`
+# #   <int> <int>
+# # 1     1     4
+# # 2     2     3
+# # 3     3     2
+# # 4     4     1
+
+

@@ -6,5 +6,11 @@
 binder = function (..., .fns = base::list(...)) .fns |> looper_reduce(`%bind%`)
 
 
+# todo: not very good inside other func define.
+fn_name = function (.x) .x |> 
+	base::substitute() |> 
+	base::as.expression() |> 
+	base::as.character()
+
 
 

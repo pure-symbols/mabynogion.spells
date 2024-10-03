@@ -13,6 +13,8 @@ name_will = function (as_name) name_i(.x = as_name) |>
 	name_as(as_name = as_name) |> 
 	base::names()
 
+name_reverse = function (x) name_i(x) |> name_as(x)
+
 
 
 namelacked_as = function (.x, as_name) base::names(.x) |> 

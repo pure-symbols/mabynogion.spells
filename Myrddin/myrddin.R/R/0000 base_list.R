@@ -64,4 +64,45 @@ list_headis = function (
 #| > list(quote(`+`), quote(`*`), quote(`::`)) |> list_headis(quote(`+`), quote(`*`))
 #| [1] TRUE
 
+liapply = function (
+		.x, 
+		.f, 
+		..., 
+		.i = name_i(.x), 
+		.use_names = T, 
+		.simplify = F, 
+		.args_more = NULL) .f |> 
+	base::match.fun() |> 
+	base::mapply(
+		FUN = _, 
+		.x, 
+		.i, 
+		..., 
+		MoreArgs = .args_more, 
+		SIMPLIFY = .simplify, 
+		USE.NAMES = .use_names) |> 
+	base::identity()
+
+#| > base::c(a = 1, b = 2) |> liapply(\ (.x, .i) paste(.i, .x))
+#| $a
+#| [1] "a 1"
+#| 
+#| $b
+#| [1] "b 2"
+#| 
+#| > base::c(a = 1, b = 2) |> liapply(paste)
+#| $a
+#| [1] "1 a"
+#| 
+#| $b
+#| [1] "2 b"
+#| 
+#| > base::c(a = 1, b = 2) |> liapply(\ (x, i) paste(i, x))
+#| $a
+#| [1] "a 1"
+#| 
+#| $b
+#| [1] "b 2"
+#| 
+
 

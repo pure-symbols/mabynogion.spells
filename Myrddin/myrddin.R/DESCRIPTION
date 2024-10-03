@@ -9,11 +9,12 @@ Depends:
 Imports: 
 	diffdf, freqtables, tictoc,
 	 magrittr, dplyr, fs,
-	 memoise, usethis, 
+	 memoise, usethis, glue,
+	 lobstr, rlang, callr,
 	 dtplyr, tibble, data.table,
 	 readr, readxl, writexl
 Suggests: 
-	zoo, lubridate,
+	zoo, lubridate, purrr,
 	 fusen, roxygen2,
 	 devtools, testthat
 License: AGPL (>= 3)
