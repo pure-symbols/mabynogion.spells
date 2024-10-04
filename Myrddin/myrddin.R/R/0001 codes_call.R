@@ -26,33 +26,35 @@ calls_asttr = function (calls, .f) calls_trby(
 
 
 calls_lsby = function 
-(listers) function 
+(..., .listers = base::c(...)) function 
 (calls, ...) calls |> 
 	base::lapply(codes_call2ast) |> 
 	looper_reduce(
 		.f = \ (a, lister) a |> base::lapply(lister),
-		.iter = listers,
+		.iter = .listers,
 		.init = _) |> 
 	base::lapply(base::unlist) |> 
 	base::lapply(base::unique) |> 
 	base::identity()
 
 calls_varls = function (calls, ...) calls |> 
-	calls_lsby(base::list(
+	calls_lsby(
 		head_rm = \ (x) x |> ast_astapply(\ (a) astelem_body(a) |> list_follow(nil)), 
 		tail_symbol = \ (x) x |> ast_elemapply(\ (a) if (base::is.symbol(a)) a else nil), 
-		.listers_done = base::identity))(...) |> 
+		.listers_done = base::identity) |> 
+		fn_apply(...) |> 
 	base::identity()
 
 calls_funls = function (calls, ...) calls |> 
-	calls_lsby(base::list(
+	calls_lsby(
 		leave_func = \ (x) x |> ast_astapply(.f = base::identity, .f_aleaf = \ (a) a |> astelem_i(0)), 
-		.listers_done = base::identity))(...) |> 
+		.listers_done = base::identity) |> 
+		fn_apply(...) |> 
 	base::identity()
 
 
 calls_pkgls = function (calls, ...) calls |> 
-	calls_lsby(base::list(
+	calls_lsby(
 		ahead_pkg = \ (x) x |> ast_astapply(
 			\ (a) if (
 				FALSE 
@@ -71,7 +73,8 @@ calls_pkgls = function (calls, ...) calls |>
 							.all_conds = F), 
 						.f = base::identity, 
 						.else_fn = \ (x) nil)), 
-		.listers_done = base::identity))(...) |> 
+		.listers_done = base::identity) |> 
+		fn_apply(...) |> 
 	base::identity()
 
 
