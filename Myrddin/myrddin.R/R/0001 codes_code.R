@@ -50,6 +50,8 @@ codes_vartr = function (strs, .f, ...) strs |> codes_trby(calls_vartr)(.f = .f, 
 #| 
 
 
-
+#' @examples
+#' load_files('R') |> codes_pkgls()
+#' 
 codes_pkgls = function (strs, ...) strs |> codes_lsby(calls_pkgls)(...)
 
