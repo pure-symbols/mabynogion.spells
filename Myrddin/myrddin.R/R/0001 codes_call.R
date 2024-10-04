@@ -39,27 +39,39 @@ calls_lsby = function
 
 calls_varls = function (calls, ...) calls |> 
 	calls_lsby(base::list(
-		head_rm = \ (x) x |> ast_astapply(\ (a) a |> utils::tail(-1) |> list_follow(base::list())), 
-		tail_symbol = \ (x) x |> ast_elemapply(\ (x) if (base::is.symbol(x)) x else base::list()), 
-		.z = base::identity))(...) |> 
+		head_rm = \ (x) x |> ast_astapply(\ (a) astelem_body(a) |> list_follow(nil)), 
+		tail_symbol = \ (x) x |> ast_elemapply(\ (a) if (base::is.symbol(a)) a else nil), 
+		.listers_done = base::identity))(...) |> 
 	base::identity()
 
 calls_funls = function (calls, ...) calls |> 
 	calls_lsby(base::list(
-		leave_func = \ (x) x |> ast_astapply(.f = base::identity, .f_aleaf = \ (x) x |> utils::head(1)), 
-		.z = base::identity))(...) |> 
+		leave_func = \ (x) x |> ast_astapply(.f = base::identity, .f_aleaf = \ (a) a |> astelem_i(0)), 
+		.listers_done = base::identity))(...) |> 
 	base::identity()
 
-# todo ...
+
 calls_pkgls = function (calls, ...) calls |> 
 	calls_lsby(base::list(
-		leave_func = \ (x) x |> ast_astapply(
+		ahead_pkg = \ (x) x |> ast_astapply(
 			\ (a) if (
 				FALSE 
 				|| a |> list_headis(base::quote(`::`)) 
 				|| a |> list_headis(base::quote(`library`)) 
-				|| F) a |> utils::tail(-1) |> utils::head(1) else base::list()), 
-		.z = base::identity))(...) |> 
+				|| F) a |> astelem_i(1) |> concat_tail(a) else 
+					a |> astelem_i(-1) |> concat_tail(a)), 
+		aleaf_clean = \ (x) x |> ast_astapply(.f_aleaf = \ (a) a |> astelem_i(0)), 
+		atree_clean = \ (x) x |> 
+			ast_astapply(
+				.f_atree = \ (a) astelem_body(a) |> 
+					lapply_if(
+						.conds = conds_apply(
+							base::is.list, 
+							base::is.pairlist, 
+							.all_conds = F), 
+						.f = base::identity, 
+						.else_fn = \ (x) nil)), 
+		.listers_done = base::identity))(...) |> 
 	base::identity()
 
 

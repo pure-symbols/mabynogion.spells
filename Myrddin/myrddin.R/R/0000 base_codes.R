@@ -1,8 +1,11 @@
 
-codes_call2ast = function (callings) callings |> 
+codes_call2ast = function (calls) calls |> 
 	base::as.list() |> 
-	purrr::map_if(
-		.p = base::is.call, 
+	lapply_if(
+		.conds = conds_apply (
+			base::is.pairlist, 
+			base::is.call, 
+			.all_conds = F), 
 		.f = codes_call2ast)
 
 codes_ast2call = function (ast) ast |> 

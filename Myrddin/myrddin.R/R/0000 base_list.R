@@ -38,11 +38,13 @@ list_pairs = function (.name, .value) base::list(.value) |> name_as(.name)
 
 
 list_isnested = function (lst) base::is.list(lst) && lst |> 
-	base::lapply(base::is.list) |> 
-	base::Reduce(
-		# f = base::.Primitive("||"),
-		f = \ (a, b) a || b,
-		x = _)
+	base::lapply(conds_apply (
+		.conds = base::c(
+			base::is.list, 
+			base::is.pairlist), 
+		.all_conds = F)) |> 
+	base::unlist() |> 
+	base::any()
 
 
 concat_head = function (.x, .head) .head |> base::c(.x)
@@ -64,45 +66,22 @@ list_headis = function (
 #| > list(quote(`+`), quote(`*`), quote(`::`)) |> list_headis(quote(`+`), quote(`*`))
 #| [1] TRUE
 
-liapply = function (
-		.x, 
-		.f, 
-		..., 
-		.i = name_i(.x), 
-		.use_names = T, 
-		.simplify = F, 
-		.args_more = NULL) .f |> 
-	base::match.fun() |> 
-	base::mapply(
-		FUN = _, 
-		.x, 
-		.i, 
-		..., 
-		MoreArgs = .args_more, 
-		SIMPLIFY = .simplify, 
-		USE.NAMES = .use_names) |> 
+
+elem_i = function (.x, .i) .x |> 
+	utils::head(.i) |> 
+	utils::tail(1) |> 
 	base::identity()
 
-#| > base::c(a = 1, b = 2) |> liapply(\ (.x, .i) paste(.i, .x))
-#| $a
-#| [1] "a 1"
-#| 
-#| $b
-#| [1] "b 2"
-#| 
-#| > base::c(a = 1, b = 2) |> liapply(paste)
-#| $a
-#| [1] "1 a"
-#| 
-#| $b
-#| [1] "2 b"
-#| 
-#| > base::c(a = 1, b = 2) |> liapply(\ (x, i) paste(i, x))
-#| $a
-#| [1] "a 1"
-#| 
-#| $b
-#| [1] "b 2"
-#| 
+nil = base::list()
+
+repeats = function (.x = NULL, .n = 0) .n |> 
+	base::abs() |> 
+	len_as(.len = _) |> 
+	looper_reduce(
+		\ (a, b) a |> list_append(if (!.n < 0) .x else nil), 
+		.init = nil) |> 
+	base::identity()
+
+
 
 

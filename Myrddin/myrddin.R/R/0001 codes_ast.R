@@ -21,6 +21,21 @@ ast_astapply = function (
 
 
 
+# ast_astfold = function (
+# 		.a, 
+# 		.f, 
+# 		.init, 
+# 		.f_atree = .f, 
+# 		.f_aleaf = .f, 
+# 		.f_elem = base::identity) if 
+# (!base::is.list(a)) .init else a |> 
+# 	looper_reduce(
+# 		.iter = _, 
+# 		.f = , 
+# 		.init = .init) |> 
+# 	base::identity()
+
+
 
 
 
@@ -47,4 +62,7 @@ ast_varsapply = function (ast, f) if
 	base::identity()
 
 
+
+astelem_i = function (.a, .i) if (!.i < 0) .a |> elem_i(.i + 1) else repeats(.n = .i)
+astelem_body = function (.a, .drop_num = 1) .a |> utils::tail(- .drop_num)
 

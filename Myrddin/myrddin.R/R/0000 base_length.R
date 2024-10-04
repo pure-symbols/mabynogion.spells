@@ -1,2 +1,2 @@
 
-len_as = function (.x, .len) base::'length<-'(x = .x, value = .len)
+len_as = function (.x = NA, .len = 0) base::'length<-'(x = .x, value = .len)
