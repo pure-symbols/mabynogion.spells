@@ -13,4 +13,4 @@ fn_name = function (.x) .x |>
 	base::as.character()
 
 
-fn_apply = function (.f, .x, ...) .f(.x, ...)
+fn_apply = function (.f, ...) .f(...)
