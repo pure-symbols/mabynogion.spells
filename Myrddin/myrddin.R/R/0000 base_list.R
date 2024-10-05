@@ -36,7 +36,7 @@ list_pairs = function (.name, .value) base::list(.value) |> name_as(.name)
 #| [1] 7
 #| 
 
-
+# todo: 这边也可以补一个短路版本，和 conds_apply 一样，不是用 lapply 而是用 reduce 、并在里面对 lst 下的每一个判断都用短路或。
 list_isnested = function (lst) base::is.list(lst) && lst |> 
 	base::lapply(conds_apply (
 		.conds = base::c(
