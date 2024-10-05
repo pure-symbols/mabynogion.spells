@@ -66,7 +66,7 @@ lapply_if = function (
 #| > base::seq(4) |> lapply_if(base::c(\ (x) x %% 2 == 0, \ (x) x %% 2 != 0), `-`, .all_conds = F) |> base::unlist()
 #| [1] -1 -2 -3 -4
 
-
+# todo: 除了分支 all any 也可分支短路 与或 : %&|% 并不用 lapply 而是在 reduce 里完成操作。
 conds_apply = function 
 (..., .conds = base::c(...), .all_conds = T) function 
 (.term) base::c(.conds) |> 
