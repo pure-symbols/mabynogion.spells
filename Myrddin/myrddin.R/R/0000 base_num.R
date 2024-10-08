@@ -62,3 +62,38 @@ sequence_div = `%seqdiv%` = function (whole_len, group_len) (base::sequence(whol
 #| > as.factor(as.numeric(z)) -> j
 #| > lobstr::obj_size(j)
 #| 4.43 kB
+
+between = function (
+		.x, 
+		.morethan, 
+		.lessthan, 
+		.opcls = base::c(T, F), 
+		..than_fns = base::list(
+			.more = base::list(`>`, `>=`), 
+			.less = base::list(`<`, `<=`)), 
+		..fn_choosed = ..than_fns |> 
+			liapply(
+				.f = \ (x, i) x[[i]], 
+				.i = .opcls + 1), 
+		..than_choosed = base::list(
+			.more = .morethan, 
+			.less = .lessthan)) ..fn_choosed |> 
+	liapply(
+		.f = \ (f, than) .x |> f(than), 
+		.i = ..than_choosed) |> 
+	base::unlist() |> 
+	base::all() |> 
+	base::identity()
+
+
+#| > 1 |> between(2,3)
+#| [1] FALSE
+#| > 1 |> between(0,3)
+#| [1] TRUE
+#| > "22q3" |> between('',3)
+#| [1] TRUE
+#| > "22q3" |> between('23q1','23q3')
+#| [1] FALSE
+#| > "23q2" |> between('23q1','23q3')
+#| [1] TRUE
+
