@@ -204,7 +204,7 @@ splidt_in = function (
 
 
 summary_keyfields = function (keyfields) keyfields |> 
-	purrr::map(~ base::parse(text = .x)) |> 
+	base::lapply(\ (x) base::parse(text = x)) |> 
 	base::lapply(base::eval) |> 
 	data.table::rbindlist()
 

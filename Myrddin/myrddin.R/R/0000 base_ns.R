@@ -37,7 +37,7 @@ ns_info = function (
 		..., 
 		.ns = base::c(...), 
 		.ns_names = .ns |> 
-			purrr::imap(
+			liapply(
 				\ (ns, i) if 
 				(base::is.character(ns)) ns else if 
 				(ns |> base::inherits('environment')) ns_name(ns) else if 

@@ -14,8 +14,8 @@ readxl_diffsheets = function (
 	base::names(sheets_intersect) = sheets_intersect
 	
 	sheets_names |> 
-		purrr::map(~ base::setdiff(x = .x, y = sheets_intersect)) |> 
-		purrr::imap(\ (x, n) usethis::ui_info(
+		base::lapply(\ (.x) base::setdiff(x = .x, y = sheets_intersect)) |> 
+		liapply(\ (x, n) usethis::ui_info(
 			"Sheets only in {usethis::ui_value(n)}: {usethis::ui_value(x)}"))
 	
 	usethis::ui_info("Diffing sheets: {usethis::ui_value(sheets_intersect)}")

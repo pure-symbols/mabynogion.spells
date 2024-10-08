@@ -176,7 +176,7 @@ rdses_diff_l2 = function (
 				
 				.dfpiece_issues = .dfpiece_reports |> Filter(x = _, f = diffdf::diffdf_has_issues)
 				
-				.issue_keys = names(.dfpiece_issues) |> purrr::map(~ parse(text = .x)) |> lapply(eval) |> data.table::rbindlist()
+				.issue_keys = names(.dfpiece_issues) |> base::lapply(\ (x) base::parse(text = x)) |> base::lapply(eval) |> data.table::rbindlist()
 				
 				usethis::ui_info("Issue keys in file {usethis::ui_value(filename)}")
 				print(.issue_keys); readr::write_csv(.issue_keys, glue::glue(".issue_keys__{filename}.csv"))

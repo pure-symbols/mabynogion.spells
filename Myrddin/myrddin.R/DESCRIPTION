@@ -12,7 +12,9 @@ Imports:
 	 memoise, usethis, glue,
 	 lobstr, rlang, callr,
 	 dtplyr, tibble, data.table,
-	 readr, readxl, writexl
+	 readr, readxl, writexl,
+	 future, furrr, future.apply,
+	 tidyselect, tidyr, parallel
 Suggests: 
 	zoo, lubridate, purrr,
 	 fusen, roxygen2,

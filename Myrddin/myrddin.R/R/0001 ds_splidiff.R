@@ -81,7 +81,7 @@ splidiff_df = function (
 		base::lapply(\ (keyfields) keyfields |> base::setdiff(keys.intersect)) |> 
 		base::lapply(summary_keyfields)
 	
-	..pair_lack_keyfields |> purrr::imap(\ (lack_keyfields, partname) if (nrow(lack_keyfields) > 0) 
+	..pair_lack_keyfields |> liapply(\ (lack_keyfields, partname) if (nrow(lack_keyfields) > 0) 
 		usethis::ui_warn("Key Fields of {usethis::ui_value(.work_name)}: Lack in {partname}: \n{outformat(lack_keyfields)}"))
 	
 	# .keys_lack_base = pair_splidfkeys$BASE |> setdiff(keys.intersect) |> summary_keyfields()
@@ -165,7 +165,7 @@ splidiff_df = function (
 
 
 splidiff_checkvar = function (diff_report, vars, .anyall = base::any, ...) diff_report |> 
-	purrr::map(~ .x$NumDiff) |> 
+	base::lapply(\ (x) x$NumDiff) |> 
 	base::Filter(x = _, f = \ (D) .anyall(vars %in% D$Variable)) |> 
 	base::identity()
 

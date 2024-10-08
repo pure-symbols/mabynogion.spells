@@ -50,7 +50,7 @@ writelines_list = function (
 		pathes = name_i(textses)) textses |> 
 	magrittr::'%>%'(name_as(., pathes)) |> 
 	magrittr::'%T>%'({usethis::ui_info("Writing into files: {usethis::ui_value(base::names(.))}")}) |> 
-	purrr::imap(readr::write_lines)
+	liapply(readr::write_lines)
 
 
 findin_files = function (
