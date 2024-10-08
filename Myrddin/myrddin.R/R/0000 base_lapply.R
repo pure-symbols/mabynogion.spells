@@ -44,17 +44,19 @@ liapply = function (
 
 
 
-
+# todo: add .lapplier, wait to test ...
 lapply_if = function (
 		.ls, 
 		.conds, 
 		.f, 
+		.lapplier = base::lapply, 
 		..., 
 		.all_conds = T, 
 		.else_fn = base::identity) .ls |> 
-	base::lapply(
+	.lapplier(
 		\ (x) (if (.conds |> conds_apply(.all_conds = .all_conds) |> fn_apply(x)) 
-			.f else .else_fn) (x)) |> 
+			.f else .else_fn) (x), 
+		...) |> 
 	base::identity()
 
 #| > base::seq(4) |> lapply_if(\ (x) x %% 2 == 0, `-`) |> base::unlist()
