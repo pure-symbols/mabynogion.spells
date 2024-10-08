@@ -59,7 +59,7 @@ str_surpluschar = function (str) base::seq(base::nchar(str) + 1) |>
 		. %in% base::unlist(base::strsplit(str,"")))) . else 
 			str_surpluschar(str)})
 
-str_transer = `%str.transer%` = 
+str_transer = `%str.tr%` = 
 function (old, new) 
 function (strs, .supchr = str_surpluschar(old)) strs |> 
 	base::paste0(.supchr) |> 
@@ -70,9 +70,12 @@ function (strs, .supchr = str_surpluschar(old)) strs |>
 	name_as(strs)
 
 #| > '%>%' = magrittr::'%>%'
-#| > base::c("aaa bbb CCC ddd bb CC", "bb CC eee 1bb CCC PPP") %>% ("bb CC" %str.transer% "tt TT")
+#| > base::c("aaa bbb CCC ddd bb CC", "bb CC eee 1bb CCC PPP") %>% ("bb CC" %str.tr% "tt TT")
 #|   aaa bbb CCC ddd bb CC   bb CC eee 1bb CCC PPP 
 #| "aaa btt TTC ddd tt TT" "tt TT eee 1tt TTC PPP" 
+
+
+strtr_crlf2lf = function (text) ('\r\n' %str.tr% '\n') (text)
 
 
 
