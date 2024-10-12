@@ -9,6 +9,10 @@ name_i = function (.x) base::names(.x) |>
 		base::seq(base::length(.x)) else .}) |> 
 	base::identity()
 
+name_asi = function (.x) .x |> 
+	name_as(name_i(.x)) |> 
+	base::identity()
+
 name_will = function (as_name) name_i(.x = as_name) |> 
 	name_as(as_name = as_name) |> 
 	base::names()
