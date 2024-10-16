@@ -1,6 +1,6 @@
 
 
-diffcols_out = function (.df) .df |> 
+diffcols_ls = function (.df) .df |> 
 	base::lapply(base::unique) |> 
 	base::lapply(base::length) |> 
 	base::lapply(\ (x) x > 1) |> 
@@ -8,6 +8,6 @@ diffcols_out = function (.df) .df |>
 	magrittr::'%>%'({name_asi(base::names(.))[.]}) |> 
 	base::identity()
 
-diffcols_show = function (.df, .cols = diffcols_out(.df)) .df |> 
+diffcols_select = function (.df, .cols = diffcols_ls(.df)) .df |> 
 	dplyr::select_at(.cols) |> 
 	base::identity()
