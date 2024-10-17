@@ -22,6 +22,14 @@ list_update = function (.ls, ..., .news = base::list(...)) base::c(.ls, .news) |
 
 list_append = function (.lst, ..., ..pairs = base::list(...)) .lst |> concat_tail(..pairs)
 list_follow = function (.lst, ..., ..pairs = base::list(...)) .lst |> concat_head(..pairs)
+list_concat = function (
+		.lst, 
+		..., 
+		..pairs = base::list(...), 
+		.tail_order = F, 
+		..concater = if (!.tail_order) list_append else list_follow) .lst |> 
+	..concater(..pairs = ..pairs) |> 
+	base::identity()
 
 list_pairs = function (.name, .value) base::list(.value) |> name_as(.name)
 
