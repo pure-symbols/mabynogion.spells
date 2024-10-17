@@ -1,0 +1,25 @@
+Package: myrddin
+Title: Myrddin - 🧚🏻‍♀️ magic toys 🤯
+Description: 
+	Some toys to do things about many thing ...
+Version: 0.0.0.9000
+Author: Ypa Y Yhm <y.ypa.yhm@outlook.com>
+Depends: 
+	R (>= 4.3)
+Imports: 
+	diffdf, freqtables, tictoc,
+	 magrittr, dplyr, fs,
+	 memoise, usethis, glue,
+	 lobstr, rlang, callr,
+	 dtplyr, tibble, data.table,
+	 readr, readxl, writexl,
+	 future, furrr, future.apply,
+	 tidyselect, tidyr, parallel
+Suggests: 
+	zoo, lubridate, purrr,
+	 fusen, roxygen2,
+	 devtools, testthat
+License: AGPL (>= 3)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2

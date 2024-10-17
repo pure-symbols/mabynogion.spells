@@ -47,3 +47,9 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# R Proj
+*.Rproj
+
+# ... add by posit RStudio
+.Rproj.user
