@@ -97,3 +97,9 @@ between = function (
 #| > "23q2" |> between('23q1','23q3')
 #| [1] TRUE
 
+
+n_pom = function (n) base::as.integer(n %/% base::abs(n))
+
+n_lpom = function (n) base::as.logical(n_pom(n) + 1)
+
+
