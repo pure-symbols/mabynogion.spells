@@ -1,4 +1,4 @@
-version: 35
+version: 36
 jobs:
 - name: pusher all-branch commit
   steps:
@@ -7,14 +7,14 @@ jobs:
     remoteUrl: https://github.com/pure-symbols/mabynogion.spells.git
     userName: yhm-amber
     passwordSecret: github.yhm-amber
-    force: false
+    force: true
     condition: ALWAYS
   - !PushRepository
     name: force to cb pure-symbols/mabynogion.spells
     remoteUrl: https://codeberg.org/pure-symbols/mabynogion.spells.git
     userName: yhm
     passwordSecret: codeberg.yhm
-    force: false
+    force: true
     condition: ALWAYS
   triggers:
   - !BranchUpdateTrigger
@@ -30,14 +30,14 @@ jobs:
     remoteUrl: https://github.com/pure-symbols/mabynogion.spells.git
     refs: refs/heads/* refs/tags/*
     withLfs: false
-    force: false
+    force: true
     condition: ALWAYS
   - !PullRepository
     name: force from cb pure-symbols/mabynogion.spells
     remoteUrl: https://codeberg.org/pure-symbols/mabynogion.spells.git
     refs: refs/heads/* refs/tags/*
     withLfs: false
-    force: false
+    force: true
     condition: ALWAYS
   triggers:
   - !ScheduleTrigger
