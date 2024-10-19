@@ -77,6 +77,32 @@ function (strs, .supchr = str_surpluschar(old)) strs |>
 
 strtr_crlf2lf = function (text) ('\r\n' %str.tr% '\n') (text)
 
+str_find = function (
+		text, 
+		pattern, 
+		.return_logic = F, 
+		.fixed = T) pattern |> 
+	base::grepl(
+		fixed = .fixed,
+		x = text,
+		pattern = _) |> 
+	magrittr::'%>%'({if 
+		(.return_logic) . |> name_as(base::names(text)) else if 
+		(!.return_logic) text[.]}) |> 
+	base::identity()
+
+#' @examples
+#' load_files('R', reader = readr::read_file) |> strfindr_crlf()
+#' 
+strfindr_crlf = function (
+		text, 
+		.return_logic = F, 
+		.pattern = '\r\n') text |> 
+	str_find(
+		pattern = .pattern, 
+		.return_logic = .return_logic, 
+		.fixed = T) |> 
+	base::identity()
 
 
 # ↑↑↑↑↑↑↓↓↓↑↑↑↓↓↑↑↑↑↑↓↑↑↓↓↓↓↓↓↓↑↑↑↑↑↓
