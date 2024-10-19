@@ -51,7 +51,12 @@ codes_vartr = function (strs, .f, ...) strs |> codes_trby(calls_vartr)(.f = .f, 
 
 
 #' @examples
+#' 
+#' # show packages in files such as in 'R/' folder: 
 #' load_files('R') |> codes_pkgls()
+#' load_files('R') |> base::lapply(strtr_crlf2lf) |> codes_pkgls()
+#' 
+#' # freq the package distribution: 
 #' load_files('R') |> codes_pkgls() |> freq_names()
 #' load_files('R') |> base::lapply(strtr_crlf2lf) |> codes_pkgls() |> freq_names()
 #' 

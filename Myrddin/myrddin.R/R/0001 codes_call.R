@@ -64,8 +64,8 @@ calls_pkgls = function (
 			ahead_pkg = \ (x) x |> ast_astapply(
 				\ (a) if (
 					FALSE 
-					|| a |> list_headis(base::quote(`::`)) 
-					|| a |> list_headis(base::quote(`library`)) 
+					|| a |> list_isfollowing(base::quote(`::`)) 
+					|| a |> list_isfollowing(base::quote(`library`)) 
 					|| F) a |> astelem_i(1) |> concat_tail(a) else 
 						a |> astelem_i(-1) |> concat_tail(a)), 
 			aleaf_clean = \ (x) x |> ast_astapply(.f_aleaf = \ (a) a |> astelem_i(0)), 

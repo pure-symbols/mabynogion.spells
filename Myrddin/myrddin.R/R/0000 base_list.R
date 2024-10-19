@@ -59,7 +59,7 @@ concat_head = function (.x, .head) .head |> base::c(.x)
 concat_tail = function (.x, .tail) .x |> base::c(.tail)
 
 
-list_headis = function (
+list_isfollowing = function (
 		.list, 
 		..., 
 		.comps = base::list(...), 
@@ -69,9 +69,9 @@ list_headis = function (
 	.comparer(.comps) |> 
 	base::identity()
 
-#| > list(quote(`+`), quote(`*`), quote(`::`)) |> list_headis(quote(`+`))
+#| > list(quote(`+`), quote(`*`), quote(`::`)) |> list_isfollowing(quote(`+`))
 #| [1] TRUE
-#| > list(quote(`+`), quote(`*`), quote(`::`)) |> list_headis(quote(`+`), quote(`*`))
+#| > list(quote(`+`), quote(`*`), quote(`::`)) |> list_isfollowing(quote(`+`), quote(`*`))
 #| [1] TRUE
 
 
