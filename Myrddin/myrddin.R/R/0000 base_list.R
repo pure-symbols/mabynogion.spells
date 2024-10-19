@@ -75,10 +75,24 @@ list_isfollowing = function (
 #| [1] TRUE
 
 
-elem_i = function (.x, .i) .x |> 
+elem_i = function (.x, .i, .unlist = F) .x |> 
 	utils::head(.i) |> 
 	utils::tail(1) |> 
+	magrittr::'%>%'({if (!.unlist) base::identity(.) else . |> base::unlist(recursive = F)}) |> 
 	base::identity()
+
+#| > list(1,2,3) |> elem_i(2)
+#| [[1]]
+#| [1] 2
+#| 
+#| > list(1,2,3) |> elem_i(2, .unlist = T)
+#| [1] 2
+#| > list(1,list(),3) |> elem_i(2, .unlist = T)
+#| list()
+#| > list(1,list(),3) |> elem_i(2, .unlist = F)
+#| [[1]]
+#| list()
+#| 
 
 nil = base::list()
 

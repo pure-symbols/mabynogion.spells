@@ -98,7 +98,10 @@ between = function (
 #| [1] TRUE
 
 
-n_pom = function (n) base::as.integer(n %/% base::abs(n))
+n_pom = function (n) if 
+(base::is.infinite(n)) (n > 0) * 2 - 1 else if 
+(n == 0) n else if 
+(T) base::as.integer(n / base::abs(n))
 
 n_lpom = function (n) base::as.logical(n_pom(n) + 1)
 
