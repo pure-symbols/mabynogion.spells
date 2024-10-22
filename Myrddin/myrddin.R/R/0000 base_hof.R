@@ -5,7 +5,7 @@
 #' - https://stackoverflow.com/questions/79105064/r-the-for-loop-may-have-bug-while-work-with-the-acc-is-a-function-but-why
 #' - https://github.com/r-wasm/webr/issues/493
 #' 
-looper_reduce = function (.iter, .f, .init = NULL) 
+looper_reduce = function (.iter, .f, ..., .init = NULL) 
 {
 	if (base::is.null(.init)) 
 	{
@@ -13,7 +13,8 @@ looper_reduce = function (.iter, .f, .init = NULL)
 		.iter = .iter |> utils::tail(-1)
 	}
 	
-	for (.i in .iter) {.init <- .f(.init, .i)}
+	# for (.i in .iter) {.init <- .f(.init, .i, ...)}
+	for (.i in .iter) {.init <- base::forceAndCall(2, .f, .init, .i, ...)}
 	base::return(.init)
 }
 
