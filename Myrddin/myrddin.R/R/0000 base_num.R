@@ -106,3 +106,5 @@ n_pom = function (n) if
 n_lpom = function (n) base::as.logical(n_pom(n) + 1)
 
 
+weisavg = function (xs, weis) xs * weis / sum(weis)
+
