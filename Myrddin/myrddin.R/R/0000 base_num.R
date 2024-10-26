@@ -106,5 +106,66 @@ n_pom = function (n) if
 n_lpom = function (n) base::as.logical(n_pom(n) + 1)
 
 
+
+#' @examples
+#' 
+#' 	.data = tibble::tribble(
+#' 		~ g,	~ x,	~ r, 
+#' 		1  ,	2  ,	1.2, 
+#' 		1  ,	2  ,	0.2, 
+#' 		2  ,	2  ,	0.1,
+#' 		2  ,	1  ,	0.1, 
+#' 		3  ,	0  ,	0.1, 
+#' 		3  ,	1  ,	0.2, 
+#' 		0  ,	9  ,	0.1, 
+#' 		0  ,	2  ,	0.2)
+#' 	
+#' 	.data |> 
+#' 		dplyr::mutate(y = r * x) |> 
+#' 		base::print() |> 
+#' 		dplyr::group_by(g) |> 
+#' 		dplyr::summarise(
+#' 			X = sum(x), 
+#' 			Y = sum(y)) |> 
+#' 		dplyr::mutate(R = Y / X)
+#' 	
+#' 	.data |> 
+#' 		dplyr::group_by(g) |> 
+#' 		dplyr::summarise(
+#' 			X = sum(x), 
+#' 			R = sum(r * x) / sum(x))
+#' 	
+#' 	.data |> 
+#' 		dplyr::group_by(g) |> 
+#' 		dplyr::summarise(
+#' 			X = sum(x), 
+#' 			R = sum(r * x / sum(x)))
+#' 	
+#' 	.data |> 
+#' 		dplyr::group_by(g) |> 
+#' 		dplyr::summarise(
+#' 			X = sum(x), 
+#' 			R = sum(r |> weisavg(x)))
+#' 	
+#' 
 weisavg = function (xs, weis, ...) xs * weis / base::sum(weis, ...)
+
+#| > .data |> dplyr::summarise(X = sum(x), R = sum(r |> weisavg(x)), .by = 'g')
+#| # A tibble: 4 × 3
+#|       g     X     R
+#|   <dbl> <dbl> <dbl>
+#| 1     1     4 0.7  
+#| 2     2     3 0.1  
+#| 3     3     1 0.2  
+#| 4     0    11 0.118
+
+#| > tibble::tibble(x = 1:4 * 10, r = 4:1/10, g = (x / 10) %% 2) |> 
+#| + 	dplyr::summarise(X = sum(x), R = sum(r |> weisavg(x)), .by = g)
+#| # A tibble: 2 × 3
+#|       g     X     R
+#|   <dbl> <dbl> <dbl>
+#| 1     1    40 0.25 
+#| 2     0    60 0.167
+
+
 
