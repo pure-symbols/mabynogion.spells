@@ -1,4 +1,6 @@
 
+
+
 time_stamp = function (
 		prec = 3, 
 		.time = base::Sys.time()) .time |> 
@@ -18,3 +20,16 @@ time_costed = `%time_cost%` = function (
 	# base::as.character.numeric_version() |> 
 	.f_fmtr() |> 
 	base::identity()
+
+
+
+
+#| > lubridate::as_datetime('2020-05-01T10:11:12.345+08:00') |> timechange::time_add(month = 1, day = -1)
+#| [1] "2020-05-31 02:11:12 UTC"
+#| > lubridate::as_datetime('2020-05-01T10:11:12.345+08:00') |> timechange::time_add(day = -1, month = 1)
+#| [1] "2020-05-31 02:11:12 UTC"
+#| > lubridate::as_datetime('2020-05-01T10:11:12.345+08:00') |> timechange::time_add(day = -1) |> timechange::time_add(month = 1)
+#| [1] "2020-05-30 02:11:12 UTC"
+
+
+

@@ -14,7 +14,9 @@ Imports:
 	 dtplyr, tibble, data.table,
 	 readr, readxl, writexl,
 	 future, furrr, future.apply,
-	 tidyselect, tidyr, parallel
+	 tidyselect, tidyr,
+	 stringi, timechange,
+	 parallel
 Suggests: 
 	zoo, lubridate, purrr,
 	 fusen, roxygen2,
