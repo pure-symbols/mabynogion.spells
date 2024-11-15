@@ -99,7 +99,7 @@ between = function (
 
 
 n_pom = function (n) if 
-(base::is.infinite(n)) (n > 0) * 2 - 1 else if 
+(base::is.infinite(n)) base::as.integer(n > 0) * 2 - 1 else if 
 (n == 0) n else if 
 (T) base::as.integer(n / base::abs(n))
 
