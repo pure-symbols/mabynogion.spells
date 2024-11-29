@@ -10,14 +10,17 @@ left_join.data.table = function (
 			data.table::key(.dt_i),
 			data.table::key(.dt)), 
 		.i_select = base::names(.dt_i) |> 
-			base::setdiff(by)) 
+			base::setdiff(by), 
+		.overwrite = T) 
 {
 	data.table::setDT(.dt)[, (.i_select) := NULL, allow.cartesian = TRUE]
 	data.table::setDT(.dt)[
 		data.table::setDT(.dt_i), 
-		on = by, 
-		(.i_select) := base::mget(
-			base::paste0('i.', .i_select))]
+		(.i_select) := base::as.integer(.overwrite) |> 
+			magrittr::'%>%'({base::c('x.', 'i.')[1 + .]}) |> 
+			base::paste0(.i_select) |> 
+			base::mget(), 
+		on = by]
 	data.table::setDT(.dt)
 }
 
