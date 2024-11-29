@@ -13,7 +13,7 @@ left_join.data.table = function (
 			base::setdiff(by)) 
 {
 	data.table::setDT(.dt)[, (.i_select) := NULL, allow.cartesian = TRUE]
-	data.table::setDT(.dt)[.dt_i, on = by, (.i_select) := base::mget(base::paste0('i.', .i_select))]
+	data.table::setDT(.dt)[data.table::setDT(.dt_i), on = by, (.i_select) := base::mget(base::paste0('i.', .i_select))]
 	data.table::setDT(.dt)
 }
 
