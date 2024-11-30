@@ -4,7 +4,8 @@
 #' - https://rdatatable.gitlab.io/data.table/reference/merge.html
 #' - https://rdatatable.gitlab.io/data.table/reference/data.table.html
 #' - https://rdatatable.gitlab.io/data.table/reference/assign.html
-#' https://rdatatable.gitlab.io/data.table/reference/special-symbols.html
+#' - https://rdatatable.gitlab.io/data.table/reference/special-symbols.html
+#' - https://rdatatable.gitlab.io/data.table/reference/setDT.html
 #' 
 left_join.data.table = function (
 		.dt, 
