@@ -2,6 +2,7 @@
 #' - https://stackoverflow.com/questions/34598139/left-join-using-data-table/34600831#34600831
 #' - https://rdatatable.gitlab.io/data.table/library/data.table/doc/datatable-joins.html
 #' - https://rdatatable.gitlab.io/data.table/reference/merge.html
+#' - https://rdatatable.gitlab.io/data.table/reference/data.table.html
 #' 
 left_join.data.table = function (
 		.dt, 
