@@ -3,6 +3,7 @@
 #' - https://rdatatable.gitlab.io/data.table/library/data.table/doc/datatable-joins.html
 #' - https://rdatatable.gitlab.io/data.table/reference/merge.html
 #' - https://rdatatable.gitlab.io/data.table/reference/data.table.html
+#' - https://rdatatable.gitlab.io/data.table/reference/assign.html
 #' 
 left_join.data.table = function (
 		.dt, 
