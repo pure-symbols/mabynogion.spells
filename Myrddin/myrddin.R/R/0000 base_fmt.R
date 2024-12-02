@@ -17,7 +17,8 @@ print_as = function (.x, class = base::class(.x)) .x |>
 outformat = function (.x, as_class = base::class(.x)) .x |> 
 	print_as(.x = _, class = as_class) |> 
 	utils::capture.output() |> 
-	base::paste(collapse = "\n")
+	base::paste(collapse = "\n") |> 
+	base::identity()
 
 #' base::identical(
 #'   x = base::seq(4) |> print_as('Dlist') |> utils::capture.output(), 
@@ -27,6 +28,9 @@ outformat = function (.x, as_class = base::class(.x)) .x |>
 #' 在 `utils::capture.output` 后 `base::cat(sep = '\n')` 就和 `utils::capture.output` 之前一样了 ……
 #' 
 
+clear_chr = function (.x, ...) .x |> 
+	base::format(scientific = F, trim = T, ...) |> 
+	base::identity()
 
 useout_lines = function (
 		.liner = usethis::ui_line, 
