@@ -28,7 +28,11 @@ namelacked_as = function (.x, as_name) base::names(.x) |>
 	magrittr::'%>%'(base::replace(. == "", NA)) |> 
 	pcollase(base::unname(
 		force = T,
-		obj = as_name)) |> 
+		obj = as_name |> 
+			magrittr::'%>%'({if 
+				(base::is.null(.)) base::as.character(NA) |> 
+					base::rep_len(base::length(.x)) else if 
+				(T) .}))) |> 
 	name_as(.x, as_name = _) |> 
 	base::identity()
 

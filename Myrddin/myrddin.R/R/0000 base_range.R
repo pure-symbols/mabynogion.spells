@@ -47,18 +47,18 @@ range_map = function (
 		.map, 
 		type_as_fn = base::identity, 
 		.map_to = NULL, 
+		.infinity_to = base::c(
+			'.infinity_less', 
+			'.infinity_more'), 
 		..., 
 		..map = .map |> 
-			magrittr::'%>%'({base::c(
-				-Inf, base::sort(.), Inf)}) |> 
-			type_as_fn() |> 
-			magrittr::'%>%'({
-				if (base::is.null(.map_to)) 
-					namelacked_self(.) else .}), 
+			magrittr::'%>%'({base::sort(type_as_fn(
+				. |> namelacked_as(.map_to) |> namelacked_self()))}) |> 
+			middle_insert(base::c(- Inf, + Inf) |> name_as(.infinity_to)), 
 		..map_to = .map_to |> 
-			magrittr::'%>%'({
-				if (base::is.null(.)) 
-					base::names(..map) else .}), 
+			magrittr::'%>%'({if 
+				(base::is.null(.)) base::names(..map) else if 
+				(T) . |> middle_insert(.infinity_to)}), 
 		.show_src = F) .x |> 
 	base::findInterval(..map, ...) |> 
 	magrittr::'%>%'({..map_to[.]}) |> 
@@ -73,11 +73,12 @@ range_map = function (
 #|            A            B            C 
 #| "2021-01-31" "2025-09-09" "2029-03-10" 
 #| > X |> range_map(Y, zoo::as.Date, .show_src = T)
+#|       2020-02-02       2023-03-03       2025-02-01       2027-07-07 
+#| ".infinity_less"              "A"              "A"              "B" 
+#| > Z = base::c(1,2,3)
+#| > V = base::c(0)
+#| > X |> range_map(Y, zoo::as.Date, Z, V, .show_src = T)
 #| 2020-02-02 2023-03-03 2025-02-01 2027-07-07 
-#|     "-Inf"        "A"        "A"        "B" 
-#| > Z = base::c(77,66,99,88)
-#| > X |> range_map(Y, zoo::as.Date, Z, .show_src = T)
-#| 2020-02-02 2023-03-03 2025-02-01 2027-07-07 
-#|         77         66         66         99 
+#|          0          1          1          2 
 
 

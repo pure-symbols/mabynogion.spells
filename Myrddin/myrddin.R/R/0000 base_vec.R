@@ -12,3 +12,7 @@ fullvec_as = function (.vec, .as) .as |>
 #| > seq(3) |> names_as('a','b','c') |> fullvec_as('X')
 #|   a   b   c 
 #| "X" "X" "X" 
+
+middle_insert = function (.x, .head_tail) base::c(
+	.head_tail |> utils::head(1), .x, 
+	.head_tail |> utils::tail(1))
