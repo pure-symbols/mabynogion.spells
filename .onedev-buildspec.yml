@@ -1,23 +1,34 @@
-version: 36
+version: 43
 jobs:
 - name: pusher all-branch commit
   steps:
-  - !PushRepository
-    name: force to gh pure-symbols/mabynogion.spells
+  - type: PushRepository
+    name: (not force) to gh pure-symbols/mabynogion.spells
     remoteUrl: https://github.com/pure-symbols/mabynogion.spells.git
     userName: yhm-amber
     passwordSecret: github.yhm-amber
-    force: true
+    force: false
     condition: ALWAYS
-  - !PushRepository
-    name: force to cb pure-symbols/mabynogion.spells
+    optional: false
+  - type: PushRepository
+    name: (force) to cb pure-symbols/mabynogion.spells
     remoteUrl: https://codeberg.org/pure-symbols/mabynogion.spells.git
     userName: yhm
     passwordSecret: codeberg.yhm
     force: true
     condition: ALWAYS
+    optional: false
+  - type: PushRepository
+    name: (force) to disrootfj pure.symbols/mabynogion.spells
+    remoteUrl: https://git.disroot.org/pure.symbols/mabynogion.spells.git
+    userName: ypayhm
+    passwordSecret: disroot.ypayhm
+    force: true
+    condition: ALWAYS
+    optional: false
   triggers:
-  - !BranchUpdateTrigger
+  - type: BranchUpdateTrigger
+    userMatch: anyone
     projects: pure.symbols/mabynogion.spells
   retryCondition: never
   maxRetries: 3
@@ -25,22 +36,32 @@ jobs:
   timeout: 3600
 - name: puller all-branch cron.03:20:10
   steps:
-  - !PullRepository
-    name: force from gh pure-symbols/mabynogion.spells
+  - type: PullRepository
+    name: (force) from gh pure-symbols/mabynogion.spells
     remoteUrl: https://github.com/pure-symbols/mabynogion.spells.git
     refs: refs/heads/* refs/tags/*
-    withLfs: false
+    withLfs: true
     force: true
     condition: ALWAYS
-  - !PullRepository
-    name: force from cb pure-symbols/mabynogion.spells
+    optional: false
+  - type: PullRepository
+    name: (not force) from cb pure-symbols/mabynogion.spells
     remoteUrl: https://codeberg.org/pure-symbols/mabynogion.spells.git
     refs: refs/heads/* refs/tags/*
-    withLfs: false
-    force: true
+    withLfs: true
+    force: false
     condition: ALWAYS
+    optional: false
+  - type: PullRepository
+    name: (not force) from disrootfj pure.symbols/mabynogion.spells
+    remoteUrl: https://git.disroot.org/pure.symbols/mabynogion.spells.git
+    refs: refs/heads/* refs/tags/*
+    withLfs: true
+    force: false
+    condition: ALWAYS
+    optional: false
   triggers:
-  - !ScheduleTrigger
+  - type: ScheduleTrigger
     cronExpression: 10 20 3 * * ?
     projects: pure.symbols/mabynogion.spells
   retryCondition: never
