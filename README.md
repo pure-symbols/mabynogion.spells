@@ -15,6 +15,13 @@
 
 这里是对睡前故事的记述。
 
+<sup>*如不会有「误认」在这里发生 —— 那么此处也就只有「准确的神经反应」而已了*</sup>  
+<sub>*所谓「天地本不全」 —— 若你也只是那样连贯之中的一环则主体也将在此并未存在 …… 然主体可说「我存在」 —— 此正因其可「误认」而得以成 —— 此「现实」也*</sub>  
+
+> <sub>*如若不误胜乎有 心存何来天地间*</sub>  
+> <sup>*不全应乎世界理 配合此间本如然*</sup>
+> 
+
 ## Read more
 
 - *[Intelligence at the Edge of Chaos](https://arxiv.org/html/2410.02536v2 "Intelligence at the Edge of Chaos | arxiv")*
